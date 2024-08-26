@@ -1,52 +1,61 @@
-# task2
+# Task Description
 
-This template should help get you started developing with Vue 3 in Vite.
+## Node.js
 
-## Recommended IDE Setup
+### 1. Create Models
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- **User Model**
+  - Fields:
+    - `id` (Primary Key)
+    - `name` (String)
+    - `city` (String)
+    - `created_at` (Timestamp)
+    - Other relevant fields...
 
-## Type Support for `.vue` Imports in TS
+- **UserImage Model**
+  - Fields:
+    - `id` (Primary Key)
+    - `image` (String, stores image path or URL)
+    - `created_at` (Timestamp)
+    - `user_id` (Foreign Key, references `User` model)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- **Associations**
+  - A `User` can have multiple `UserImages`.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### 2. Create Seeder for User Model
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- Create a seeder that generates 10,000 records in the `User` table.
 
-## Customize configuration
+### 3. Create Seeder for UserImage Model
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Create a seeder that generates 100,000 records in the `UserImage` table, each
+  linked randomly to a `User`.
 
-## Project Setup
+### 4. Create API Endpoint: List Users Sorted by Number of Images
 
-```sh
-npm install
-```
+- Create an API endpoint that returns a list of `Users` sorted by the number of
+  `UserImages` they have.
 
-### Compile and Hot-Reload for Development
+### 5. Create API Endpoint: Create User with UserImage
 
-```sh
-npm run dev
-```
+- Create an API endpoint to create a new `User` along with an associated
+  `UserImage`.
+- The API should accept:
+  - `name` (string)
+  - `city` (string)
+  - `image` (file - jpg, png)
 
-### Type-Check, Compile and Minify for Production
+## HTML + JavaScript
 
-```sh
-npm run build
-```
+### 1. Simple Page with Data Table
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+- Create a simple HTML page with a table to display `Users` (name, city,
+  images_count) sorted by the number of `UserImages`.
+- Data in the table should be loaded using AJAX from the API.
 
-```sh
-npm run test:unit
-```
+### 2. Simple Form to Create User with Image
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Create a simple form where the user can input:
+  - `name` (text)
+  - `city` (text)
+  - `image` (file - jpg, png)

@@ -11,6 +11,7 @@ const ITERATIONS = Math.ceil(TOTAL_USERS / CHUNK_SIZE)
 export const FILE_NAME_USERS_IDS = join(__dirname, 'users.ids.txt')
 
 export async function seed(knex: Knex): Promise<void> {
+  console.log('Seeding users...')
   try {
     await knex('users').del()
     await writeFile(FILE_NAME_USERS_IDS, '', { encoding: 'utf-8' })

@@ -1,8 +1,9 @@
 {
   "name": "api",
   "scripts": {
-    "migration:up": "knex migrate:latest",
-    "migration:down": "knex migrate:rollback",
+    "migrate:up": "knex migrate:latest",
+    "migrate:down": "knex migrate:rollback",
+    "seed": "knex seed:run",
     "dev": "tsx watch src/index.ts"
   },
   "dependencies": {
@@ -10,6 +11,7 @@
     "hono": "^4.5.9"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/node": "^20.11.17",
     "knex": "^3.1.0",
     "sqlite3": "^5.1.7",

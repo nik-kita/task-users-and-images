@@ -1,3 +1,6 @@
+.env
+dev.sqlite3
+
 # dev
 .yarn/
 !.yarn/releases

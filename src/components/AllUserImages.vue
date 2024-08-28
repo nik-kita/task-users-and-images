@@ -15,7 +15,7 @@ const data = (await fetch(API_URL + '/api/users/images/' + props.user_id).then((
 <template>
   <ul class="justify-center gap-2 flex flex-wrap overflow-scroll w-full h-full">
     <li v-for="image in data.images" :key="image">
-      <img :src="image" />
+      <img :src="API_URL + '/api/images/' + image" />
     </li>
   </ul>
 </template>

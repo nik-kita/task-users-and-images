@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { db } from '../../db'
 
 const CWD = process.cwd()
 const getFile = async (image: string) => {
@@ -12,12 +13,24 @@ const getFile = async (image: string) => {
   }
 }
 
-const saveFile = async (file: File) => {
+const saveFile = async (file: File, user_id: number) => {
   try {
-    const path = `image-${Date.now()}-${file.name}.${file.type}`
+    const path = `image-${Date.now()}-${file.name}}`
     await writeFile(join(CWD, 'local-s3', path), file.stream())
-    return path
+    const { lastInsertRowid } = await db
+      .prepare(
+        `--sql
+      INSERT INTO user_images (user_id, image)
+      VALUES (@user_id, @path)
+    `
+      )
+      .run({ user_id, path })
+    return {
+      path,
+      image_id: lastInsertRowid
+    }
   } catch (err) {
+    console.error(err)
     return null
   }
 }

@@ -31,12 +31,16 @@ export const userRouter = new Hono()
       const { city, name, image } = c.req.valid('form')
       const user_id = await UserService.create({ city, name })
 
-      let image_path: string | null = null
+      let image_id: number | null = null
       if (image) {
-        image_path = await ImageService.saveFile(image)
+        console.log('saving image')
+        const result = await ImageService.saveFile(image, user_id as number)
+        if (result) {
+          image_id = result.image_id as number
+        }
       }
 
-      return c.json({ user_id, image_path })
+      return c.json({ user_id, image_path: image_id })
     }
   )
   .get(

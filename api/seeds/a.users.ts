@@ -5,7 +5,7 @@ import { join } from 'path'
 import { genChunk } from './utils/gen-chunk.util'
 import { logError } from './utils/log-error.util'
 
-const TOTAL_USERS = 10_000
+const TOTAL_USERS = 10 // should be 10_000
 const CHUNK_SIZE = 500
 const ITERATIONS = Math.ceil(TOTAL_USERS / CHUNK_SIZE)
 export const FILE_NAME_USERS_IDS = join(__dirname, 'users.ids.txt')

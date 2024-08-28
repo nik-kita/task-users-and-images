@@ -8,8 +8,8 @@ export const imageRouter = new Hono().get(
   zValidator(
     'param',
     z.object({
-      image: z.string()
-    })
+      image: z.string(),
+    }),
   ),
   async (c) => {
     const { image } = c.req.valid('param')
@@ -21,9 +21,9 @@ export const imageRouter = new Hono().get(
 
     return c.json(
       {
-        error: `${image} was not found!`
+        error: `${image} was not found!`,
       },
-      404
+      404,
     )
-  }
+  },
 )

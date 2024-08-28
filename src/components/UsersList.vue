@@ -12,8 +12,8 @@ const props = withDefaults(
     limit: 10,
     order_by: 'image_count',
     order_direction: 'DESC',
-    offset: 0
-  }
+    offset: 0,
+  },
 )
 
 const { users } = await fetch_usersList(props)

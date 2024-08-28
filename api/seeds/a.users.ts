@@ -19,11 +19,11 @@ export async function seed(knex: Knex): Promise<void> {
       const users = genChunk(CHUNK_SIZE, () => ({
         name: faker.person.fullName(),
         city: faker.location.city(),
-        created_at: faker.date.between({ from: '2020-01-01', to: '2024-01-01' }).getTime()
+        created_at: faker.date.between({ from: '2020-01-01', to: '2024-01-01' }).getTime(),
       }))
       const ids = await knex.batchInsert('users', users).returning('id')
       await appendFile(FILE_NAME_USERS_IDS, ids.map(({ id }) => id).join(' '), {
-        encoding: 'utf-8'
+        encoding: 'utf-8',
       })
     }
   } catch (err: any) {

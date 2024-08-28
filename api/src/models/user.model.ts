@@ -5,7 +5,7 @@ export const UserSchema = z.object({
   created_at: z.string().date().optional(),
   updated_at: z.string().date().optional(),
   name: z.string().min(1).max(32),
-  city: z.string().min(1).max(32)
+  city: z.string().min(1).max(32),
 })
 
 export type User = z.infer<typeof UserSchema>

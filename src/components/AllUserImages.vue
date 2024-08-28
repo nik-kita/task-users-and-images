@@ -7,7 +7,7 @@ const props = defineProps<{
 console.log(props)
 
 const data = (await fetch(API_URL + '/api/users/images/' + props.user_id).then((r) =>
-  r.json()
+  r.json(),
 )) as {
   images: string[]
 }

@@ -14,6 +14,6 @@ export async function logError(err: any, fileName = new Date().toLocaleDateStrin
       err:
       ${err}
   `,
-    { encoding: 'utf-8' }
+    { encoding: 'utf-8' },
   )
 }

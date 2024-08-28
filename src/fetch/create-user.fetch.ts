@@ -7,7 +7,7 @@ type UserData = {
 
 export const fetch_createUser = async (
   payload: UserData,
-  image?: [{ name: string; file: File }]
+  image?: [{ name: string; file: File }],
 ) => {
   const formData = new FormData()
   formData.append('name', payload.name)
@@ -17,7 +17,7 @@ export const fetch_createUser = async (
   }
   const res = await fetch(`${API_URL}/api/users`, {
     method: 'POST',
-    body: formData
+    body: formData,
   })
 
   if (!res.ok) {

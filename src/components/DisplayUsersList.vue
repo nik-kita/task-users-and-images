@@ -17,7 +17,7 @@ const options = computed(() => {
     order_by: order_by.value,
     order_direction: order_direction.value,
     limit: limitWithThrottle.value,
-    offset: offsetWithThrottle.value
+    offset: offsetWithThrottle.value,
   })
 })
 const show_modal = ref(false)

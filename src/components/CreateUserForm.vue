@@ -5,7 +5,7 @@ import { FormKit } from '@formkit/vue'
 const handleSubmit = async ({
   name,
   city,
-  image
+  image,
 }: {
   name: string
   city: string
@@ -15,9 +15,9 @@ const handleSubmit = async ({
     await fetch_createUser(
       {
         name,
-        city
+        city,
       },
-      image
+      image,
     )
   } catch (err) {
     console.error(err)

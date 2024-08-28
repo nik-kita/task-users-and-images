@@ -22,12 +22,12 @@ const saveFile = async (file: File, user_id: number) => {
         `--sql
       INSERT INTO user_images (user_id, image)
       VALUES (@user_id, @path)
-    `
+    `,
       )
       .run({ user_id, path })
     return {
       path,
-      image_id: lastInsertRowid
+      image_id: lastInsertRowid,
     }
   } catch (err) {
     console.error(err)
@@ -37,5 +37,5 @@ const saveFile = async (file: File, user_id: number) => {
 
 export const ImageService = {
   getFile,
-  saveFile
+  saveFile,
 }

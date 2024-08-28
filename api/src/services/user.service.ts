@@ -45,5 +45,5 @@ async function getManyByUserId(user_id: number) {
 export const UserService = {
   list,
   create,
-  getManyByUserId
+  getManyByUserId,
 }

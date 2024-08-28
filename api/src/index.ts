@@ -18,5 +18,5 @@ console.info(`Server is running on port http://localhost:${PORT}`)
 
 serve({
   fetch: app.fetch,
-  port: PORT
+  port: PORT,
 })

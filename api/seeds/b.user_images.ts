@@ -12,7 +12,7 @@ const CWD = process.cwd()
 export async function seed(knex: Knex): Promise<void> {
   await knex('user_images').del()
   const idsData = await readFile(FILE_NAME_USERS_IDS, {
-    encoding: 'utf-8'
+    encoding: 'utf-8',
   })
   const userIds = idsData.split(' ').map(Number)
 
@@ -24,7 +24,7 @@ export async function seed(knex: Knex): Promise<void> {
         console.log(img)
         file = new File(
           [await (await fetch(img)).blob()],
-          img.split('/').pop() || `image-${Date.now()}.jpg`
+          img.split('/').pop() || `image-${Date.now()}.jpg`,
         )
       } catch (err) {
         console.log(err)
@@ -38,7 +38,7 @@ export async function seed(knex: Knex): Promise<void> {
           INSERT INTO user_images ('user_id', 'image')
           VALUES(:user_id, :path)
         `,
-        { user_id, path }
+        { user_id, path },
       )
     }
   } catch (err) {

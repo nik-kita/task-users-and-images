@@ -1,6 +1,8 @@
 {
   "name": "api",
   "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/src/index.js",
     "migrate:up": "npx knex migrate:latest",
     "migrate:down": "npx knex migrate:rollback",
     "seed": "npx knex seed:run",
@@ -16,8 +18,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@types/better-sqlite3": "^7.6.11",
     "@types/node": "^20.11.17",
+    "@types/tough-cookie": "^4.0.5",
     "knex": "^3.1.0",
     "sqlite3": "^5.1.7",
     "tsx": "^4.7.1"

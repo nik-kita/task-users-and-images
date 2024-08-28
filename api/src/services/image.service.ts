@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { db } from '../../db'
+import { db } from '../db'
 
 const CWD = process.cwd()
 const getFile = async (image: string) => {

@@ -60,7 +60,7 @@ export const userRouter = new Hono()
   )
   .get('/', zValidator('query', UsersListOptions), async (c) => {
     const options = c.req.valid('query')
-    const users = await UserService.list(options)
+    const users = await UserService.list(options as any)
 
     return c.json({
       users,

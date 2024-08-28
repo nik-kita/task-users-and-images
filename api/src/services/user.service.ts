@@ -1,4 +1,4 @@
-import { db } from '../../db'
+import { db } from '../db'
 import { User } from '../models/user.model'
 
 async function list(options: {

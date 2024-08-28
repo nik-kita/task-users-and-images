@@ -1,10 +1,10 @@
 {
   "name": "api",
   "scripts": {
-    "migrate:up": "knex migrate:latest",
-    "migrate:down": "knex migrate:rollback",
-    "seed": "knex seed:run",
-    "dev": "tsx watch src/index.ts"
+    "migrate:up": "npx knex migrate:latest",
+    "migrate:down": "npx knex migrate:rollback",
+    "seed": "npx knex seed:run",
+    "dev": "npx tsx watch src/index.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.12.1",

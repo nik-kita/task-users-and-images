@@ -22,7 +22,7 @@ export async function seed(knex: Knex): Promise<void> {
     for (let i = 0; i < ITERATIONS; ++i) {
       const userImages = genChunk(CHUNK_SIZE, () => ({
         image: faker.image.url(),
-        user_id: randomIndex(userIds)
+        user_id: userIds[randomIndex(userIds)]
       }))
       await knex.batchInsert('user_images', userImages)
     }

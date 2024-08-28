@@ -9,14 +9,16 @@ const handleSubmit = async ({
 }: {
   name: string
   city: string
-  image?: [File]
+  image?: [{ name: string; file: File }]
 }) => {
   try {
-    await fetch_createUser({
-      name,
-      city,
-      ...(image && { image: image[0] })
-    })
+    await fetch_createUser(
+      {
+        name,
+        city
+      },
+      image
+    )
   } catch (err) {
     console.error(err)
   }

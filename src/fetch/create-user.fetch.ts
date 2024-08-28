@@ -5,12 +5,15 @@ type UserData = {
   city: string
 }
 
-export const fetch_createUser = async (payload: UserData, image?: File) => {
+export const fetch_createUser = async (
+  payload: UserData,
+  image?: [{ name: string; file: File }]
+) => {
   const formData = new FormData()
   formData.append('name', payload.name)
   formData.append('city', payload.city)
   if (image) {
-    formData.append('image', image)
+    formData.append('image', image[0].file)
   }
   const res = await fetch(`${API_URL}/api/users`, {
     method: 'POST',

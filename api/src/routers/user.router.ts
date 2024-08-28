@@ -12,12 +12,27 @@ const UsersListOptions = z.object({
 })
 
 export const userRouter = new Hono()
-  .post('/', zValidator('form', UserSchema), async (c) => {
-    const data = c.req.valid('form')
-    const user_id = await UserService.create(data)
+  .post(
+    '/',
+    zValidator(
+      'form',
+      UserSchema.merge(
+        z.object({
+          image: z
+            .custom<File>((v) => {
+              return v instanceof File
+            })
+            .optional()
+        })
+      )
+    ),
+    async (c) => {
+      const data = c.req.valid('form')
+      const user_id = await UserService.create(data)
 
-    return c.json({ user_id })
-  })
+      return c.json({ user_id })
+    }
+  )
   .get('/', zValidator('query', UsersListOptions), async (c) => {
     const options = c.req.valid('query')
     const users = await UserService.list(options)

@@ -2,6 +2,8 @@
 import { useThrottle } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import UsersList from './UsersList.vue'
+import ModalComponent from './ModalComponent.vue'
+import AllUserImages from './AllUserImages.vue'
 
 const is_asc = ref(false)
 const order_direction = computed(() => (is_asc.value ? 'ASC' : 'DESC'))
@@ -18,8 +20,18 @@ const options = computed(() => {
     offset: offsetWithThrottle.value
   })
 })
+const show_modal = ref(false)
+const user_id = ref<number | null>(null)
 </script>
 <template>
+  <ModalComponent v-model="show_modal">
+    <Suspense :key="String(user_id)" v-if="user_id">
+      <template #fallback>Loading...</template>
+      <template #default>
+        <AllUserImages :user_id="user_id" />
+      </template>
+    </Suspense>
+  </ModalComponent>
   <h1>Users</h1>
   <div class="text-xl bg-gray-300 flex justify-around pr-4 py-2">
     <div>
@@ -49,10 +61,21 @@ const options = computed(() => {
         :offset
         :order_direction
         :order_by
-        #default="{ name, city, image_count, updated_at }"
+        #default="{ id, name, city, image_count, updated_at }"
       >
         <p>{{ name }} from {{ city }}</p>
-        <a href="#" class="text-center italic p-1 bg-slate-100"> {{ image_count }} images </a>
+        <a href="#" class="text-center italic p-1 bg-slate-100">
+          <button
+            @click="
+              () => {
+                show_modal = true
+                user_id = id
+              }
+            "
+          >
+            {{ image_count }} images
+          </button>
+        </a>
         <p>updated at {{ updated_at }}</p>
       </UsersList>
     </template>

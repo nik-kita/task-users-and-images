@@ -39,6 +39,21 @@ export const userRouter = new Hono()
       return c.json({ user_id, image_path })
     }
   )
+  .get(
+    '/images/:user_id',
+    zValidator(
+      'param',
+      z.object({
+        user_id: z.string({ coerce: true })
+      })
+    ),
+    async (c) => {
+      const { user_id } = c.req.valid('param')
+      const data = await UserService.getManyByUserId(parseInt(user_id))
+
+      return c.json({ images: data.map(({ image }) => image) })
+    }
+  )
   .get('/', zValidator('query', UsersListOptions), async (c) => {
     const options = c.req.valid('query')
     const users = await UserService.list(options)

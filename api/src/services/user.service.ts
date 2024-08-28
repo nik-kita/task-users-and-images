@@ -1,4 +1,5 @@
 import { db } from '../../db'
+import { User } from '../models/user.model'
 
 async function list(options: {
   limit: number
@@ -6,7 +7,6 @@ async function list(options: {
   order_by: 'image_count' | 'user.name'
   order_direction: 'ASC' | 'DESC'
 }) {
-  console.log(options)
   const query = db.prepare(`--sql
     SELECT user.*, COUNT(ui.id) image_count
     FROM users user
@@ -24,6 +24,17 @@ async function list(options: {
   return Promise.resolve(result)
 }
 
+async function create(user: User) {
+  const query = db.prepare(`--sql
+    INSERT INTO users (name, city)
+    VALUES (@name, @city)
+  `)
+  const { lastInsertRowid } = query.run(user)
+
+  return Promise.resolve(lastInsertRowid)
+}
+
 export const UserService = {
-  list
+  list,
+  create
 }

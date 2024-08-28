@@ -21,7 +21,7 @@ const { users } = await fetch_usersList(props)
 <template>
   <ul>
     <li v-for="u in users" :key="u.id">
-      <div class="grid grid-cols-3 gap-3">
+      <div class="grid grid-cols-3 gap-3 py-1">
         <slot v-bind="u">
           <pre>{{ u }}</pre>
         </slot>

@@ -34,8 +34,8 @@ const options = computed(() => {
     </div>
     <div>
       <select v-model="order_by">
-        <option :value="'image_count'">images count</option>
-        <option :value="'user.updated_at'">last updated</option>
+        <option :value="'user.updated_at'">user creation</option>
+        <option :value="'user.name'">user name</option>
         <option :value="'image_count'">images count</option>
       </select>
     </div>
@@ -52,7 +52,7 @@ const options = computed(() => {
         #default="{ name, city, image_count, updated_at }"
       >
         <p>{{ name }} from {{ city }}</p>
-        <p class="text-start">{{ image_count }} images</p>
+        <a href="#" class="text-center italic p-1 bg-slate-100"> {{ image_count }} images </a>
         <p>updated at {{ updated_at }}</p>
       </UsersList>
     </template>

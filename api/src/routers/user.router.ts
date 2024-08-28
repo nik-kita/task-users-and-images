@@ -14,8 +14,6 @@ export const userRouter = new Hono().get('/', zValidator('query', UsersListOptio
   const options = c.req.valid('query')
   const users = await UserService.list(options)
 
-  console.log('users', users)
-
   return c.json({
     users
   })

@@ -12,8 +12,8 @@ type User = {
 export const fetch_usersList = async (options: {
   limit: number
   offset: number
-  orderDirection: 'ASC' | 'DESC'
-  orderBy: 'user.id' | 'image_count'
+  order_direction: 'ASC' | 'DESC'
+  order_by: 'user.id' | 'image_count'
 }) => {
   const res = await fetch(`${API_URL}/api/users${obj_to_qs(options)}`)
 

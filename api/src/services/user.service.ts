@@ -6,13 +6,14 @@ async function list(options: {
   order_by: 'image_count' | 'user.id'
   order_direction: 'ASC' | 'DESC'
 }) {
+  console.log(options)
   const query = db.prepare(`--sql
     SELECT u.*, COUNT(ui.id) image_count
     FROM users u
     LEFT JOIN user_images ui
     ON u.id = ui.user_id
     GROUP BY u.id
-    ORDER BY @order_by ${options.order_direction === 'ASC' ? 'ASC' : 'DESC'}
+    ORDER BY image_count ${options.order_direction === 'ASC' ? 'ASC' : 'DESC'}
     LIMIT @limit
     OFFSET @offset
   `)

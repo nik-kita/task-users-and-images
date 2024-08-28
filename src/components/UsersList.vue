@@ -5,17 +5,18 @@ const props = withDefaults(
   defineProps<{
     limit?: number
     offset?: number
-    orderDirection?: 'ASC' | 'DESC'
-    orderBy?: 'user.id' | 'image_count'
+    order_direction?: 'ASC' | 'DESC'
+    order_by?: 'user.id' | 'image_count'
   }>(),
   {
     limit: 10,
-    orderBy: 'image_count',
-    orderDirection: 'DESC',
+    order_by: 'image_count',
+    order_direction: 'DESC',
     offset: 0
   }
 )
 
+console.log(props)
 const { users } = await fetch_usersList(props)
 </script>
 <template>

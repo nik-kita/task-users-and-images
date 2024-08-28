@@ -1,4 +1,5 @@
 import { API_URL } from '@/const'
+import { obj_to_qs } from '@/utils/obj-to-qs.util'
 
 type User = {
   id: number
@@ -8,8 +9,14 @@ type User = {
   city: string
 }
 
-export const fetch_usersList = async () => {
-  const res = await fetch(`${API_URL}/api/users`)
+export const fetch_usersList = async (options: {
+  limit: number
+  offset: number
+  orderDirection: 'ASC' | 'DESC'
+  orderBy: 'user.id' | 'image_count'
+}) => {
+  const res = await fetch(`${API_URL}/api/users${obj_to_qs(options)}`)
+
   if (!res.ok) {
     throw res.statusText
   }

@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import UsersList from './components/UsersList.vue'
+import DisplayUsersList from './components/DisplayUsersList.vue'
 </script>
 
 <template>
   <section>
-    <Suspense>
-      <template #default>
-        <UsersList />
-      </template>
-      <template #fallback>
-        <p>Loading...</p>
-      </template>
-    </Suspense>
+    <DisplayUsersList />
   </section>
 </template>

@@ -1,19 +1,20 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { db } from '../db'
+import { userRouter } from './routers/user.router'
+import { cors } from 'hono/cors'
 
 const app = new Hono()
+const PORT = 3000
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
+app.use(cors({ origin: process.env.ORIGINS?.split(' ') || 'http://localhost:5173' }))
+app.route('/api/users', userRouter)
+app.get('/*', (c) => {
+  return c.text('All API is defined by the /api path')
 })
 
-const port = 3000
-console.log(`Server is running on port ${port}`)
+console.info(`Server is running on port http://localhost:${PORT}`)
 
 serve({
   fetch: app.fetch,
-  port
-}).on('close', () => {
-  db.close()
+  port: PORT
 })

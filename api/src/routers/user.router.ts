@@ -2,6 +2,7 @@ import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
 import { z } from 'zod'
 import { UserSchema } from '../models/user.model'
+import { ImageService } from '../services/image.service'
 import { UserService } from '../services/user.service'
 
 const UsersListOptions = z.object({
@@ -27,10 +28,15 @@ export const userRouter = new Hono()
       )
     ),
     async (c) => {
-      const data = c.req.valid('form')
-      const user_id = await UserService.create(data)
+      const { city, name, image } = c.req.valid('form')
+      const user_id = await UserService.create({ city, name })
 
-      return c.json({ user_id })
+      let image_path: string | null = null
+      if (image) {
+        image_path = await ImageService.saveFile(image)
+      }
+
+      return c.json({ user_id, image_path })
     }
   )
   .get('/', zValidator('query', UsersListOptions), async (c) => {

@@ -4,7 +4,7 @@ import { User } from '../models/user.model'
 async function list(options: {
   limit: number
   offset: number
-  order_by: 'image_count' | 'user.name'
+  order_by: 'image_count' | 'user.name' | 'user.updated_at'
   order_direction: 'ASC' | 'DESC'
 }) {
   const query = db.prepare(`--sql
@@ -13,9 +13,7 @@ async function list(options: {
     LEFT JOIN user_images ui
     ON user.id = ui.user_id
     GROUP BY user.id
-    ORDER BY ${
-      options.order_by === 'user.name' ? 'user.name' : 'image_count'
-    } ${options.order_direction === 'ASC' ? 'ASC' : 'DESC'}
+    ORDER BY ${options.order_by} ${options.order_direction}
     LIMIT @limit
     OFFSET @offset
   `)

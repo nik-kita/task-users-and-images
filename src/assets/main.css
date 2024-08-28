@@ -4,3 +4,8 @@ html {
   scrollbar-color: none;
   scrollbar-width: none;
 }
+
+h1 {
+  font-size: xx-large;
+  font-weight: bold;
+}

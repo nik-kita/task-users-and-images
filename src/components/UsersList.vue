@@ -6,7 +6,7 @@ const props = withDefaults(
     limit?: number
     offset?: number
     order_direction?: 'ASC' | 'DESC'
-    order_by?: 'user.id' | 'image_count'
+    order_by?: 'user.name' | 'image_count'
   }>(),
   {
     limit: 10,

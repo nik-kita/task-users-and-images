@@ -3,17 +3,19 @@ import { db } from '../../db'
 async function list(options: {
   limit: number
   offset: number
-  order_by: 'image_count' | 'user.id'
+  order_by: 'image_count' | 'user.name'
   order_direction: 'ASC' | 'DESC'
 }) {
   console.log(options)
   const query = db.prepare(`--sql
-    SELECT u.*, COUNT(ui.id) image_count
-    FROM users u
+    SELECT user.*, COUNT(ui.id) image_count
+    FROM users user
     LEFT JOIN user_images ui
-    ON u.id = ui.user_id
-    GROUP BY u.id
-    ORDER BY image_count ${options.order_direction === 'ASC' ? 'ASC' : 'DESC'}
+    ON user.id = ui.user_id
+    GROUP BY user.id
+    ORDER BY ${
+      options.order_by === 'user.name' ? 'user.name' : 'image_count'
+    } ${options.order_direction === 'ASC' ? 'ASC' : 'DESC'}
     LIMIT @limit
     OFFSET @offset
   `)

@@ -11,7 +11,8 @@ async function list(options: {
     FROM users u
     LEFT JOIN user_images ui
     ON u.id = ui.user_id
-    GROUP BY @order_by
+    GROUP BY u.id
+    ORDER BY @order_by ${options.order_direction === 'ASC' ? 'ASC' : 'DESC'}
     LIMIT @limit
     OFFSET @offset
   `)

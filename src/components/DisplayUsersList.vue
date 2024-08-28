@@ -13,7 +13,7 @@ const options = computed(() => {
 </script>
 <template>
   <div>
-    <div>
+    <div class="flex gap-2">
       <button @click="() => (orderDirection = orderDirection === 'ASC' ? 'DESC' : 'ASC')">
         {{ 'Total images' }}
       </button>
@@ -21,7 +21,9 @@ const options = computed(() => {
     </div>
     <Suspense :key="options">
       <template #default>
-        <UsersList :limit />
+        <UsersList :limit :order-direction="orderDirection" #default="{ name }">
+          <h4>{{ name }}</h4>
+        </UsersList>
       </template>
       <template #fallback>
         <pre>Loading...</pre>

@@ -7,7 +7,7 @@ import { FILE_NAME_USERS_IDS } from './a.users'
 import { logError } from './utils/log-error.util'
 import { randomIndex } from './utils/random-index.util'
 
-const TOTAL_USER_IMAGES = 100_000
+const TOTAL_USER_IMAGES = 100 // should be 100_000
 const CWD = process.cwd()
 export async function seed(knex: Knex): Promise<void> {
   await knex('user_images').del()

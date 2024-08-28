@@ -11,7 +11,6 @@ const CHUNK_SIZE = 500
 const ITERATIONS = Math.ceil(TOTAL_USER_IMAGES / CHUNK_SIZE)
 
 export async function seed(knex: Knex): Promise<void> {
-  console.log('Seeding user_images...')
   await knex('user_images').del()
   const idsData = await readFile(FILE_NAME_USERS_IDS, {
     encoding: 'utf-8'

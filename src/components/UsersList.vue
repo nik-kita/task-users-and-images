@@ -16,15 +16,16 @@ const props = withDefaults(
   }
 )
 
-console.log(props)
 const { users } = await fetch_usersList(props)
 </script>
 <template>
   <ul>
     <li v-for="u in users" :key="u.id">
-      <slot v-bind="u">
-        <pre>{{ u }}</pre>
-      </slot>
+      <div class="grid grid-cols-3 gap-3">
+        <slot v-bind="u">
+          <pre>{{ u }}</pre>
+        </slot>
+      </div>
     </li>
   </ul>
 </template>

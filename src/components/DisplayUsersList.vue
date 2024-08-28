@@ -39,17 +39,21 @@ const options = computed(() => {
         <option :value="'image_count'">images count</option>
       </select>
     </div>
-    .
-    <label class="px-2" for="order-direction-checkbox">Less first</label>
+    <label class="px-2" for="order-direction-checkbox">Reverse order</label>
     <input id="order-direction-checkbox" type="checkbox" v-model="is_asc" :value="true" />
   </div>
   <Suspense :key="options">
     <template #default>
-      <UsersList :limit :offset :order_direction :order_by #default="{ name, city, image_count }">
-        <div class="flex justify-between">
-          <p>{{ name }} from {{ city }}</p>
-          <p class="text-start">{{ image_count }} images.</p>
-        </div>
+      <UsersList
+        :limit
+        :offset
+        :order_direction
+        :order_by
+        #default="{ name, city, image_count, updated_at }"
+      >
+        <p>{{ name }} from {{ city }}</p>
+        <p class="text-start">{{ image_count }} images</p>
+        <p>updated at {{ updated_at }}</p>
       </UsersList>
     </template>
     <template #fallback>

@@ -1,8 +1,8 @@
 import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
 import { z } from 'zod'
-import { UserService } from '../services/user.service'
 import { UserSchema } from '../models/user.model'
+import { UserService } from '../services/user.service'
 
 const UsersListOptions = z.object({
   limit: z.number({ coerce: true }).default(10),
@@ -12,8 +12,8 @@ const UsersListOptions = z.object({
 })
 
 export const userRouter = new Hono()
-  .post('/', zValidator('json', UserSchema), async (c) => {
-    const data = c.req.valid('json')
+  .post('/', zValidator('form', UserSchema), async (c) => {
+    const data = c.req.valid('form')
     const user_id = await UserService.create(data)
 
     return c.json({ user_id })

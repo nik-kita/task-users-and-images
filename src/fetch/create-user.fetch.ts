@@ -1,14 +1,20 @@
 import { API_URL } from '@/const'
 
-type Data = {
+type UserData = {
   name: string
   city: string
 }
 
-export const fetch_createUser = async (payload: Data) => {
+export const fetch_createUser = async (payload: UserData, image?: File) => {
+  const formData = new FormData()
+  formData.append('name', payload.name)
+  formData.append('city', payload.city)
+  if (image) {
+    formData.append('image', image)
+  }
   const res = await fetch(`${API_URL}/api/users`, {
     method: 'POST',
-    body: JSON.stringify(payload)
+    body: formData
   })
 
   if (!res.ok) {

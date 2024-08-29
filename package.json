@@ -15,6 +15,7 @@
     "format": "prettier --write src/ api/"
   },
   "dependencies": {
+    "@formkit/themes": "^1.6.5",
     "@formkit/vue": "^1.6.5",
     "@vueuse/core": "^11.0.3",
     "tailwind-merge": "^2.5.2",

@@ -53,7 +53,7 @@ export const userRouter = new Hono()
     ),
     async (c) => {
       const { user_id } = c.req.valid('param')
-      const data = await UserService.getManyByUserId(parseInt(user_id))
+      const data = await ImageService.getManyByUserId(parseInt(user_id))
 
       return c.json({ images: data.map(({ image }) => image) })
     },

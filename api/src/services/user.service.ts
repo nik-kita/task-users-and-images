@@ -32,18 +32,8 @@ async function create(user: User) {
   return Promise.resolve(lastInsertRowid)
 }
 
-async function getManyByUserId(user_id: number) {
-  const query = db.prepare(`--sql
-    SELECT * FROM user_images WHERE user_id = @user_id
-  `)
-  const result = query.all({ user_id }) as { image: string }[]
-  console.log(result)
-
-  return Promise.resolve(result)
-}
 
 export const UserService = {
   list,
   create,
-  getManyByUserId,
 }

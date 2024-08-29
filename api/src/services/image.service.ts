@@ -15,18 +15,18 @@ const getFile = async (image: string) => {
 
 const saveFile = async (file: File, user_id: number) => {
   try {
-    const path = process.env.SELF_URL + `/api/images/image-${Date.now()}-${file.name}}`
-    await writeFile(join(CWD, 'local-s3', path), file.stream())
+    const name = `image-${Date.now()}-${file.name}}`
+    await writeFile(join(CWD, 'local-s3', name), file.stream())
     const { lastInsertRowid } = await db
       .prepare(
         `--sql
       INSERT INTO user_images (user_id, image)
-      VALUES (@user_id, @path)
+      VALUES (@user_id, @image)
     `,
       )
-      .run({ user_id, path })
+      .run({ user_id, image: `${process.env.SELF_URL}/api/images/${name}` })
     return {
-      path,
+      path: name,
       image_id: lastInsertRowid,
     }
   } catch (err) {
@@ -43,7 +43,6 @@ async function getManyByUserId(user_id: number) {
 
   return Promise.resolve(result)
 }
-
 
 export const ImageService = {
   getFile,

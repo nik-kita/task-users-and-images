@@ -32,7 +32,6 @@ async function create(user: User) {
   return Promise.resolve(lastInsertRowid)
 }
 
-
 export const UserService = {
   list,
   create,
